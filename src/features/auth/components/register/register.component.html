@@ -1,0 +1,91 @@
+﻿<ActionBar title="Register">
+    <NavigationButton text="Back" android.systemIcon="ic_menu_back"></NavigationButton>
+</ActionBar>
+
+<ScrollView>
+    <StackLayout class="p-20">
+        <Label text="Create Account" class="h1 text-center m-b-30"></Label>
+
+        <TextField
+            [(ngModel)]="userData.email"
+            hint="Email"
+            keyboardType="email"
+            autocorrect="false"
+            autocapitalizationType="none"
+            class="input m-b-10">
+        </TextField>
+
+        <TextField
+            [(ngModel)]="userData.password"
+            hint="Password"
+            secure="true"
+            class="input m-b-10">
+        </TextField>
+
+        <TextField
+            [(ngModel)]="userData.confirmPassword"
+            hint="Confirm Password"
+            secure="true"
+            class="input m-b-10">
+        </TextField>
+
+        <TextField
+            [(ngModel)]="userData.name"
+            hint="Full Name"
+            class="input m-b-10">
+        </TextField>
+
+        <TextField
+            [(ngModel)]="userData.phoneNumber"
+            hint="Phone Number"
+            keyboardType="phone"
+            class="input m-b-10">
+        </TextField>
+
+        <TextField
+            [(ngModel)]="userData.pharmacyName"
+            hint="Pharmacy Name"
+            class="input m-b-10">
+        </TextField>
+
+        <TextField
+            [(ngModel)]="userData.pharmacyAddress"
+            hint="Pharmacy Address"
+            class="input m-b-10">
+        </TextField>
+
+        <TextField
+            [(ngModel)]="userData.licenseNumber"
+            hint="License Number"
+            class="input m-b-20">
+        </TextField>
+
+        <Label
+            *ngIf="errorMessage"
+            [text]="errorMessage"
+            class="text-danger m-b-10">
+        </Label>
+
+        <Button
+            text="Register"
+            (tap)="onRegister()"
+            [isEnabled]="!isLoading"
+            class="btn btn-primary m-b-10">
+        </Button>
+
+        <ActivityIndicator
+            [busy]="isLoading"
+            class="m-t-10">
+        </ActivityIndicator>
+
+        <Label
+            text="Already have an account?"
+            class="text-center m-t-20">
+        </Label>
+        <Button
+            text="Login"
+            [nsRouterLink]="['/auth/login']"
+            class="btn btn-outline">
+        </Button>
+    </StackLayout>
+</ScrollView>

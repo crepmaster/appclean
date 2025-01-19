@@ -1,0 +1,45 @@
+﻿<ActionBar title="Profile">
+    <ActionItem *ngIf="!isEditing" text="Edit" (tap)="onEdit()" android.position="right"></ActionItem>
+    <ActionItem *ngIf="isEditing" text="Save" (tap)="onSave()" android.position="right"></ActionItem>
+</ActionBar>
+
+<ScrollView>
+    <StackLayout class="p-20">
+        <Label text="Profile Information" class="h2 m-b-20"></Label>
+
+        <GridLayout rows="auto" columns="100, *" class="m-b-10">
+            <Label text="Name:" class="font-bold" row="0" col="0"></Label>
+            <TextField *ngIf="isEditing" [(ngModel)]="user.name" row="0" col="1"></TextField>
+            <Label *ngIf="!isEditing" [text]="user?.name" row="0" col="1"></Label>
+        </GridLayout>
+
+        <GridLayout rows="auto" columns="100, *" class="m-b-10">
+            <Label text="Email:" class="font-bold" row="0" col="0"></Label>
+            <TextField *ngIf="isEditing" [(ngModel)]="user.email" row="0" col="1"></TextField>
+            <Label *ngIf="!isEditing" [text]="user?.email" row="0" col="1"></Label>
+        </GridLayout>
+
+        <GridLayout rows="auto" columns="100, *" class="m-b-10">
+            <Label text="Phone:" class="font-bold" row="0" col="0"></Label>
+            <TextField *ngIf="isEditing" [(ngModel)]="user.phoneNumber" row="0" col="1"></TextField>
+            <Label *ngIf="!isEditing" [text]="user?.phoneNumber" row="0" col="1"></Label>
+        </GridLayout>
+
+        <GridLayout rows="auto" columns="100, *" class="m-b-10">
+            <Label text="Pharmacy:" class="font-bold" row="0" col="0"></Label>
+            <TextField *ngIf="isEditing" [(ngModel)]="user.pharmacyName" row="0" col="1"></TextField>
+            <Label *ngIf="!isEditing" [text]="user?.pharmacyName" row="0" col="1"></Label>
+        </GridLayout>
+
+        <GridLayout rows="auto" columns="100, *" class="m-b-10">
+            <Label text="Address:" class="font-bold" row="0" col="0"></Label>
+            <TextField *ngIf="isEditing" [(ngModel)]="user.pharmacyAddress" row="0" col="1"></TextField>
+            <Label *ngIf="!isEditing" [text]="user?.pharmacyAddress" row="0" col="1"></Label>
+        </GridLayout>
+
+        <Label *ngIf="errorMessage" [text]="errorMessage" class="text-danger m-t-10"></Label>
+        <Label *ngIf="successMessage" [text]="successMessage" class="text-success m-t-10"></Label>
+
+        <ActivityIndicator [busy]="isSaving"></ActivityIndicator>
+    </StackLayout>
+</ScrollView>

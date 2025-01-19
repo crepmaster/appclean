@@ -1,0 +1,53 @@
+﻿<ActionBar title="Login">
+</ActionBar>
+<ScrollView>
+    <StackLayout class="p-20">
+        <Image src="res://app_icon" width="100" height="100" class="m-b-30"></Image>
+        
+        <Label text="Welcome to NoWastedMed" class="h1 text-center m-b-30"></Label>
+        
+        <TextField
+            [(ngModel)]="email"
+            hint="Email"
+            keyboardType="email"
+            autocorrect="false"
+            autocapitalizationType="none"
+            class="input m-b-10">
+        </TextField>
+        
+        <TextField
+            [(ngModel)]="password"
+            hint="Password"
+            secure="true"
+            class="input m-b-20">
+        </TextField>
+        
+        <Label
+            *ngIf="errorMessage"
+            [text]="errorMessage"
+            class="text-danger m-b-10">
+        </Label>
+        
+        <Button
+            text="Login"
+            (tap)="onLogin()"
+            [isEnabled]="!isLoading"
+            class="btn btn-primary m-b-10">
+        </Button>
+        
+        <ActivityIndicator
+            [busy]="isLoading"
+            class="m-t-10">
+        </ActivityIndicator>
+        
+        <Label
+            text="Don't have an account?"
+            class="text-center m-t-20">
+        </Label>
+        <Button
+            text="Register"
+            [nsRouterLink]="['/auth/register']"
+            class="btn btn-outline">
+        </Button>
+    </StackLayout>
+</ScrollView>

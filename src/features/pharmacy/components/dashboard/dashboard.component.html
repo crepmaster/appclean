@@ -1,0 +1,54 @@
+﻿<ActionBar title="Dashboard">
+    <ActionItem text="Profile" (tap)="onProfileTap()" ios.position="right" android.position="actionBar"></ActionItem>
+    <ActionItem text="Logout" (tap)="onLogout()" ios.position="right" android.position="actionBar"></ActionItem>
+</ActionBar>
+
+<ScrollView>
+    <GridLayout rows="auto, auto, auto, auto" class="p-20">
+        <!-- Welcome Section -->
+        <StackLayout row="0" class="m-b-20">
+            <Label [text]="'Welcome, ' + (currentUser?.name || 'User')" class="h2"></Label>
+            <Label [text]="currentUser?.pharmacyName || 'Your Pharmacy'" class="h3 text-muted"></Label>
+        </StackLayout>
+
+        <!-- Stats Cards -->
+        <GridLayout row="1" columns="*, *" rows="*, *" class="m-b-20">
+            <!-- Total Medicines -->
+            <StackLayout row="0" col="0" class="stats-card m-5" (tap)="onInventoryTap()">
+                <Label text="Total Medicines" class="stats-title"></Label>
+                <Label [text]="stats.totalMedicines.toString()" class="stats-value"></Label>
+            </StackLayout>
+
+            <!-- Expiring Soon -->
+            <StackLayout row="0" col="1" class="stats-card m-5 warning" (tap)="onInventoryTap()">
+                <Label text="Expiring Soon" class="stats-title"></Label>
+                <Label [text]="stats.expiringSoon.toString()" class="stats-value"></Label>
+            </StackLayout>
+
+            <!-- Available for Exchange -->
+            <StackLayout row="1" col="0" class="stats-card m-5 success" (tap)="onExchangesTap()">
+                <Label text="Available for Exchange" class="stats-title"></Label>
+                <Label [text]="stats.availableForExchange.toString()" class="stats-value"></Label>
+            </StackLayout>
+
+            <!-- Pending Exchanges -->
+            <StackLayout row="1" col="1" class="stats-card m-5 info" (tap)="onExchangesTap()">
+                <Label text="Pending Exchanges" class="stats-title"></Label>
+                <Label [text]="stats.pendingExchanges.toString()" class="stats-value"></Label>
+            </StackLayout>
+        </GridLayout>
+
+        <!-- Quick Actions -->
+        <StackLayout row="2" class="m-t-20">
+            <Label text="Quick Actions" class="h3 m-b-10"></Label>
+            <Button text="View Inventory" (tap)="onInventoryTap()" class="btn btn-primary m-b-10"></Button>
+            <Button text="Manage Exchanges" (tap)="onExchangesTap()" class="btn btn-outline m-b-10"></Button>
+        </StackLayout>
+
+        <!-- Loading & Error States -->
+        <StackLayout row="3">
+            <ActivityIndicator [busy]="isLoading"></ActivityIndicator>
+            <Label *ngIf="errorMessage" [text]="errorMessage" class="text-danger"></Label>
+        </StackLayout>
+    </GridLayout>
+</ScrollView>

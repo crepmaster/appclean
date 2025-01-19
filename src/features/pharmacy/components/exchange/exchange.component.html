@@ -1,0 +1,38 @@
+﻿<ActionBar title="Medicine Exchanges">
+    <NavigationButton text="Back" android.systemIcon="ic_menu_back"></NavigationButton>
+</ActionBar>
+
+<GridLayout rows="auto, *">
+    <!-- Exchange List -->
+    <ListView row="1" [items]="exchanges" class="list-group">
+        <ng-template let-exchange="item">
+            <GridLayout columns="*, auto" class="list-group-item p-10">
+                <StackLayout col="0">
+                    <Label [text]="'Exchange ID: ' + exchange.id" class="h3"></Label>
+                    <Label [text]="'Medicine ID: ' + exchange.medicineId" class="text-muted"></Label>
+                    <Label [text]="'Quantity: ' + exchange.quantity" class="text-muted"></Label>
+                    <Label [text]="'Status: ' + exchange.status" 
+                           [class.text-success]="exchange.status === 'accepted'"
+                           [class.text-danger]="exchange.status === 'rejected'"
+                           [class.text-warning]="exchange.status === 'proposed'">
+                    </Label>
+                </StackLayout>
+                
+                <StackLayout col="1" *ngIf="!isOwner(exchange) && exchange.status === 'proposed'">
+                    <Button text="Accept" 
+                            (tap)="onAcceptExchange(exchange)"
+                            class="btn btn-success btn-sm m-b-5">
+                    </Button>
+                    <Button text="Reject" 
+                            (tap)="onRejectExchange(exchange)"
+                            class="btn btn-danger btn-sm">
+                    </Button>
+                </StackLayout>
+            </GridLayout>
+        </ng-template>
+    </ListView>
+
+    <!-- Loading & Error States -->
+    <ActivityIndicator [busy]="isLoading"></ActivityIndicator>
+    <Label *ngIf="errorMessage" [text]="errorMessage" class="text-danger text-center"></Label>
+</GridLayout>

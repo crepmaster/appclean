@@ -1,0 +1,60 @@
+﻿<ActionBar title="Inventory">
+    <NavigationButton text="Back" android.systemIcon="ic_menu_back"></NavigationButton>
+    <ActionItem text="Add" (tap)="showAddDialog = true" ios.position="right" android.position="actionBar"></ActionItem>
+</ActionBar>
+
+<GridLayout rows="auto, *">
+    <!-- Search Bar -->
+    <SearchBar row="0" hint="Search medicines..." class="m-5"></SearchBar>
+
+    <!-- Medicine List -->
+    <ListView row="1" [items]="medicines" class="list-group">
+        <ng-template let-medicine="item">
+            <GridLayout columns="*, auto" class="list-group-item p-10">
+                <StackLayout col="0">
+                    <Label [text]="medicine.name" class="h3"></Label>
+                    <Label [text]="'Batch: ' + medicine.batchNumber" class="text-muted"></Label>
+                    <Label [text]="'Expires: ' + medicine.expiryDate | date" class="text-muted"></Label>
+                    <GridLayout columns="auto, auto" class="m-t-5">
+                        <Label col="0" [text]="'Total: ' + medicine.totalQuantity" class="text-info m-r-10"></Label>
+                        <Label col="1" 
+                               [text]="'Exchangeable: ' + medicine.exchangeableQuantity"
+                               [class.text-success]="medicine.status === 'available_for_exchange'"
+                               [class.text-muted]="medicine.status !== 'available_for_exchange'">
+                        </Label>
+                    </GridLayout>
+                </StackLayout>
+                <Button col="1" 
+                        text="Exchange" 
+                        (tap)="onSetExchangeable(medicine)"
+                        class="btn btn-outline btn-sm">
+                </Button>
+            </GridLayout>
+        </ng-template>
+    </ListView>
+
+    <!-- Add Medicine Dialog -->
+    <GridLayout *ngIf="showAddDialog" class="dialog-overlay">
+        <StackLayout class="dialog p-20">
+            <Label text="Add New Medicine" class="h3 text-center m-b-20"></Label>
+            
+            <TextField [(ngModel)]="newMedicine.name" hint="Medicine Name" class="input m-b-10"></TextField>
+            <TextField [(ngModel)]="newMedicine.manufacturer" hint="Manufacturer" class="input m-b-10"></TextField>
+            <TextField [(ngModel)]="newMedicine.drugType" hint="Drug Type" class="input m-b-10"></TextField>
+            <TextField [(ngModel)]="newMedicine.batchNumber" hint="Batch Number" class="input m-b-10"></TextField>
+            <TextField [(ngModel)]="newMedicine.totalQuantity" 
+                      hint="Total Quantity" 
+                      keyboardType="number" 
+                      class="input m-b-10">
+            </TextField>
+            <DatePicker [(ngModel)]="newMedicine.expiryDate" class="m-b-10"></DatePicker>
+
+            <Button text="Add Medicine" (tap)="onAddMedicine()" class="btn btn-primary m-b-10"></Button>
+            <Button text="Cancel" (tap)="showAddDialog = false" class="btn btn-outline"></Button>
+        </StackLayout>
+    </GridLayout>
+
+    <!-- Loading & Error States -->
+    <ActivityIndicator [busy]="isLoading"></ActivityIndicator>
+    <Label *ngIf="errorMessage" [text]="errorMessage" class="text-danger text-center"></Label>
+</GridLayout>

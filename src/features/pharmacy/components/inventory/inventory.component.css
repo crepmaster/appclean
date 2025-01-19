@@ -1,0 +1,29 @@
+﻿.list-group-item {
+    background-color: white;
+    border-bottom-width: 1;
+    border-bottom-color: #e5e5e5;
+}
+
+.dialog-overlay {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.dialog {
+    background-color: white;
+    border-radius: 10;
+    width: 80%;
+    vertical-align: center;
+    horizontal-align: center;
+}
+
+.text-info {
+    color: #3b82f6;
+}
+
+.text-success {
+    color: #10b981;
+}
+
+.text-muted {
+    color: #666;
+}

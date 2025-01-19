@@ -1,0 +1,33 @@
+﻿.stats-card {
+    background-color: white;
+    border-radius: 10;
+    padding: 15;
+    elevation: 3;
+}
+
+.stats-title {
+    font-size: 14;
+    color: #666;
+    margin-bottom: 5;
+}
+
+.stats-value {
+    font-size: 24;
+    font-weight: bold;
+    color: #333;
+}
+
+.warning {
+    border-left-color: #f59e0b;
+    border-left-width: 4;
+}
+
+.success {
+    border-left-color: #10b981;
+    border-left-width: 4;
+}
+
+.info {
+    border-left-color: #3b82f6;
+    border-left-width: 4;
+}
